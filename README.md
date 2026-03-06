@@ -38,6 +38,9 @@ Handles the full character lifecycle — splash screen, character creation, sele
 ### Character Selection
 ![Characters](https://r2.fivemanage.com/b8BG4vav9CjKMUdz6iKnY/Multicharacter_Previews/characters_redesign.png)
 
+### Character Creation
+![Character Creation](https://r2.fivemanage.com/DYU0chgxzWP85xodo3Oc8/Screenshot2026-03-05220135.png)
+
 ### Spawn Selector
 ![Spawn Selector](https://r2.fivemanage.com/b8BG4vav9CjKMUdz6iKnY/Multicharacter_Previews/spawn_redesign.png)
 
