@@ -33,7 +33,6 @@ RegisterNUICallback('GetData', function(data, cb)
 	while LocalPlayer.state.ID == nil do
 		Wait(1)
 	end
-    FadeOutWithTimeout(500)
 
     Callbacks:ServerCallback('Characters:GetServerData', {}, function(serverData)
         SendNUIMessage({
