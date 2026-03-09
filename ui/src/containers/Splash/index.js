@@ -218,12 +218,12 @@ const Splash = (props) => {
 			<div className={classes.scanlines} />
 			<div className={classes.card}>
 				<div className={classes.cardAccent} />
-				<img className={classes.logo} src={logo} alt="Mythic RP" />
+				<img className={classes.logo} src={logo} alt="Mythic Framework" />
 				<div className={classes.divider} />
 				<div className={classes.welcomeRow}>
 					<span className={classes.welcomeLabel}>Welcome to</span>
 					<span className={classes.welcomeTitle}>
-						<span>Mythic</span> Roleplay
+						<span>Mythic</span> Framework
 					</span>
 				</div>
 				<div className={classes.promptRow}>
