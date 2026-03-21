@@ -33,16 +33,16 @@ Handles the full character lifecycle — splash screen, character creation, sele
 <div align="center">
 
 ### Splash Screen
-![Splash](https://r2.fivemanage.com/b8BG4vav9CjKMUdz6iKnY/Multicharacter_Previews/splash_redesign.png)
+![Splash](https://r2.fivemanage.com/DYU0chgxzWP85xodo3Oc8/Screenshot2026-03-21151754.png)
 
 ### Character Selection
-![Characters](https://r2.fivemanage.com/b8BG4vav9CjKMUdz6iKnY/Multicharacter_Previews/characters_redesign.png)
+![Characters](https://r2.fivemanage.com/DYU0chgxzWP85xodo3Oc8/Screenshot2026-03-21151817.png)
 
 ### Character Creation
 ![Character Creation](https://r2.fivemanage.com/DYU0chgxzWP85xodo3Oc8/Screenshot2026-03-05220135.png)
 
 ### Spawn Selector
-![Spawn Selector](https://r2.fivemanage.com/b8BG4vav9CjKMUdz6iKnY/Multicharacter_Previews/spawn_redesign.png)
+![Spawn Selector](https://r2.fivemanage.com/DYU0chgxzWP85xodo3Oc8/Screenshot2026-03-21151836.png)
 
 </div>
 
