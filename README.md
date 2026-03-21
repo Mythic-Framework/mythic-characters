@@ -1,8 +1,6 @@
 <div align="center">
 
-![Banner](https://r2.fivemanage.com/b8BG4vav9CjKMUdz6iKnY/mythic_banner_old.png)
-
-# mythic-characters
+# Mythic Characters
 
 ### *Character selection, creation & spawn system*
 
