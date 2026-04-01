@@ -14,6 +14,7 @@ function RetrieveComponents()
 	Sequence = exports['mythic-base']:FetchComponent('Sequence')
 	Reputation = exports['mythic-base']:FetchComponent('Reputation')
 	Apartment = exports['mythic-base']:FetchComponent('Apartment')
+	Version = exports['mythic-base']:FetchComponent('Version')
 	RegisterCommands()
 	_spawnFuncs = {}
 end
@@ -34,11 +35,14 @@ AddEventHandler('Core:Shared:Ready', function()
 		'Sequence',
 		'Reputation',
 		'Apartment',
+		'Version',
 	}, function(error)
 		if #error > 0 then return end -- Do something to handle if not all dependencies loaded
 		RetrieveComponents()
 		RegisterCallbacks()
 		RegisterMiddleware()
 		Startup()
+
+		Version:Check('Mythic-Framework/Mythic-VersionCheckers', GetCurrentResourceName())
 	end)
 end)
