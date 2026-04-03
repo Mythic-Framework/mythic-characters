@@ -197,15 +197,19 @@ const Splash = (props) => {
 	const classes = useStyles();
 
 	const handleInput = (e) => {
-		if (e.which == 1 || e.which == 13 || e.which == 32) {
+		if (e.type === 'click') {
+			if (e.button === 0) props.login();
+		} else if (e.type === 'keydown' && (e.which === 13 || e.which === 32)) {
 			props.login();
 		}
 	};
 
 	useEffect(() => {
-		['click', 'keydown', 'keyup'].forEach((e) => window.addEventListener(e, handleInput));
+		window.addEventListener('click', handleInput);
+		window.addEventListener('keydown', handleInput);
 		return () => {
-			['click', 'keydown', 'keyup'].forEach((e) => window.removeEventListener(e, handleInput));
+			window.removeEventListener('click', handleInput);
+			window.removeEventListener('keydown', handleInput);
 		};
 	}, []);
 
