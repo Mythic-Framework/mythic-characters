@@ -1,9 +1,11 @@
+local cam = nil
+
 local foTo = 0
 function FadeOutWithTimeout(time, timeOut)
     DoScreenFadeOut(time or 500)
     foTo = 0
     while IsScreenFadingOut() and foTo < (timeOut or 3000) do
-        foTo += 1
+        foTo = foTo + 1
         Wait(1)
     end
 end
@@ -13,43 +15,37 @@ function FadeInWithTimeout(time, timeOut)
     DoScreenFadeIn(time or 500)
     fiTo = 0
     while IsScreenFadingIn() and fiTo < (timeOut or 3000) do
-        fiTo += 1
+        fiTo = fiTo + 1
         Wait(1)
     end
 end
 
 Spawn = {
     Choosing = true,
-    Cam = nil,
     InitCamera = function(self)
-        TransitionFromBlurred(0)
+        TransitionToBlurred(500)
         DoScreenFadeOut(500)
-        self.Cam = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', 600.1, 507.49, 644.86, 10.76, 0.00, 0.00, 100.00, false, 0)
-        SetCamUseShallowDofMode(self.Cam, false)
-        SetCamActiveWithInterp(self.Cam, true, 900, true, true)
+        cam = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', 600.1, 507.49, 644.86, 10.76, 0.00, 0.00, 100.00, false, 0)
+        SetCamActiveWithInterp(cam, true, 900, true, true)
         RenderScriptCams(true, false, 1, true, true)
         DisplayRadar(false)
     end,
     Init = function(self)
-        if not IsScreenFadedOut() then
-		    FadeOutWithTimeout(500)
-	    end
         local ped = PlayerPedId()
 --      ShutdownLoadingScreenNui()
         SetEntityCoords(ped, 600.1, 507.49, 644.86)
         FreezeEntityPosition(ped, true)
         SetEntityVisible(ped, false)
         DoScreenFadeIn(500)
-        while not IsScreenFadingIn() do
-		    Wait(10)
-	    end
-        FadeInWithTimeout(500)
         Wait(500) -- Why the fuck does NUI just not do this without a wait here???
         SetNuiFocus(true, true)
         SendNUIMessage({ type = 'APP_SHOW' })
     end,
     SpawnToWorld = function(self, data, cb)
-        FadeOutWithTimeout(500)
+        DoScreenFadeOut(500)
+        while not IsScreenFadedOut() do
+            Wait(10)
+        end
 
         local player = PlayerPedId()
         SetTimecycleModifier('default')
@@ -70,11 +66,6 @@ Spawn = {
         SetEntityAsMissionEntity(player, true, true)
         SetModelAsNoLongerNeeded(model)
 
-        while not IsEntityFocus(player) do
-		    ClearFocus()
-		    Wait(1)
-	    end
-
         Wait(300)
 
         DestroyAllCams(true)
@@ -85,7 +76,7 @@ Spawn = {
         SetEntityVisible(player, true)
         FreezeEntityPosition(player, false)
 
-        self.Cam = nil
+        cam = nil
 
         SetPlayerInvincible(PlayerId(), false)
         SetCanAttackFriendly(player, true, true)
@@ -99,7 +90,7 @@ Spawn = {
             TriggerEvent(data.action, data.data)
         else
             SetEntityCoords(player, data.spawn.location.x, data.spawn.location.y, data.spawn.location.z)
-            FadeInWithTimeout(500)
+            DoScreenFadeIn(500)
         end
 
         SetFocusEntity(PlayerPedId())

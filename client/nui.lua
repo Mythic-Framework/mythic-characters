@@ -26,24 +26,9 @@ local previews = {
 }
 
 local peds = {}
-local loadingCharacterList = false
-
-local function clearPreviewPeds()
-    for _, v in ipairs(peds) do
-        if DoesEntityExist(v) then
-            DeleteEntity(v)
-        end
-    end
-    peds = {}
-end
 
 RegisterNUICallback('GetData', function(data, cb)
     cb('ok')
-
-    if loadingCharacterList then
-        return
-    end
-    loadingCharacterList = true
 
 	while LocalPlayer.state.ID == nil do
 		Wait(1)
@@ -56,26 +41,14 @@ RegisterNUICallback('GetData', function(data, cb)
         })
 
         Callbacks:ServerCallback('Characters:GetCharacters', {}, function(characters)
-            clearPreviewPeds()
+            SetEntityCoords(PlayerPedId(),  685.865, 576.222, 132.841, 0.0, 0.0, 0.0, false)
 
-            local px, py, pz = 685.865, 576.222, 132.841
-            local myPed = PlayerPedId()
-            SetEntityCoords(myPed, px, py, pz, 0.0, 0.0, 0.0, false)
-            SetEntityVisible(myPed, false, false)
-            SetFocusPosAndVel(px, py, pz, 0.0, 0.0, 0.0)
-            RequestCollisionAtCoord(px, py, pz)
-
-            local SpawnRef = exports['mythic-base']:FetchComponent('Spawn')
-            local prevCam = SpawnRef.Cam
-            local cam2 = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', px, py, pz, 338.730, 0.00, 0.00, 75.00, false, 0)
-            SetCamUseShallowDofMode(cam2, false)
-            SetCamActiveWithInterp(cam2, prevCam, 1000, true, true)
+            local cam2 = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', 685.865, 576.222, 132.841, 338.730, 0.00, 0.00, 75.00, false, 0)
+            SetCamActiveWithInterp(cam2, cam, 1000, true, true)
             RenderScriptCams(true, false, 1, true, true)
-            TransitionFromBlurred(0)
-            if prevCam and DoesCamExist(prevCam) then
-                DestroyCam(prevCam, false)
-            end
-            SpawnRef.Cam = cam2
+            TransitionFromBlurred(500)
+            DestroyCam(cam)
+            cam = cam2
 
             for k, v in ipairs(characters) do
                 if v.Preview then
@@ -135,7 +108,6 @@ RegisterNUICallback('GetData', function(data, cb)
                 type = 'SET_STATE',
                 data = { state = 'STATE_CHARACTERS' }
             })
-            loadingCharacterList = false
         end)
     end)
 end)
@@ -183,7 +155,8 @@ RegisterNUICallback('DeleteCharacter', function(data, cb)
                 data = { id = data.id }
             })
         end
-        clearPreviewPeds()
+        for _, v in ipairs(peds) do if DoesEntityExist(v) then DeleteEntity(v) end end -- Clear old peds
+        peds = {}
 
         SendNUIMessage({ type = 'LOADING_HIDE' })
     end)
@@ -202,7 +175,8 @@ RegisterNUICallback('SelectCharacter', function(data, cb)
                 data = { state = 'STATE_SPAWN' }
             })
         end
-        clearPreviewPeds()
+        for _, v in ipairs(peds) do if DoesEntityExist(v) then DeleteEntity(v) end end -- Clear old peds
+        peds = {}
         SendNUIMessage({ type = 'LOADING_HIDE' })
     end)
 end)
