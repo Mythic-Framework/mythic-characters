@@ -16,6 +16,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Character from '../../components/Character';
 import { showCreator, deleteCharacter, getCharacterSpawns } from '../../actions/characterActions';
 
+const CHARACTER_SLOT_LIMIT = 5;
+
 const useStyles = makeStyles(() => ({
 	root: {
 		position: 'fixed',
@@ -23,7 +25,7 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'flex-end',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		pointerEvents: 'none',
 	},
 	orb1: {
@@ -58,8 +60,11 @@ const useStyles = makeStyles(() => ({
 		flexDirection: 'column',
 		background: 'rgba(18, 16, 37, 0.96)',
 		border: '1px solid rgba(32,134,146,0.2)',
-		boxShadow: '0 0 0 1px rgba(32,134,146,0.06), 0 24px 80px rgba(0,0,0,0.7), 0 0 40px rgba(32,134,146,0.06)',
+		boxShadow:
+			'0 0 0 1px rgba(32,134,146,0.06), 0 24px 80px rgba(0,0,0,0.7), 0 0 40px rgba(32,134,146,0.06)',
 		animation: '$panelSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) both',
+		borderRadius: 16,
+		overflow: 'hidden',
 	},
 	panelHeader: {
 		padding: '18px 20px 14px',
@@ -82,7 +87,7 @@ const useStyles = makeStyles(() => ({
 		marginBottom: 2,
 	},
 	panelTitle: {
-		fontFamily: "'Orbitron', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 16,
 		fontWeight: 700,
 		color: '#ffffff',
@@ -95,9 +100,9 @@ const useStyles = makeStyles(() => ({
 		padding: '8px 16px',
 		background: 'rgba(32,134,146,0.12)',
 		border: '1px solid rgba(32,134,146,0.4)',
-		borderRadius: 2,
+		borderRadius: 16,
 		color: '#208692',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 13,
 		fontWeight: 600,
 		letterSpacing: '0.1em',
@@ -129,7 +134,7 @@ const useStyles = makeStyles(() => ({
 		whiteSpace: 'nowrap',
 		padding: '2px 6px',
 		border: '1px solid rgba(32,134,146,0.4)',
-		borderRadius: 2,
+		borderRadius: 16,
 	},
 	motdText: {
 		fontSize: 12,
@@ -141,11 +146,14 @@ const useStyles = makeStyles(() => ({
 	},
 	charList: {
 		flex: 1,
-		padding: 0,
+		padding: '10px 12px 12px',
 		overflowY: 'auto',
 		overflowX: 'hidden',
 		'&::-webkit-scrollbar': { width: 4 },
-		'&::-webkit-scrollbar-thumb': { background: 'rgba(32,134,146,0.3)', borderRadius: 2 },
+		'&::-webkit-scrollbar-thumb': {
+			background: 'rgba(32,134,146,0.3)',
+			borderRadius: 8,
+		},
 		'&::-webkit-scrollbar-thumb:hover': { background: '#208692' },
 		'&::-webkit-scrollbar-track': { background: 'transparent' },
 	},
@@ -153,7 +161,7 @@ const useStyles = makeStyles(() => ({
 		margin: 20,
 		padding: 32,
 		border: '1px dashed rgba(32,134,146,0.25)',
-		borderRadius: 2,
+		borderRadius: 16,
 		textAlign: 'center',
 		cursor: 'pointer',
 		transition: 'all 0.2s ease',
@@ -168,7 +176,7 @@ const useStyles = makeStyles(() => ({
 		marginBottom: 10,
 	},
 	noCharTitle: {
-		fontFamily: "'Orbitron', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 14,
 		color: 'rgba(255,255,255,0.5)',
 		marginBottom: 6,
@@ -185,16 +193,16 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		gap: 10,
 		flexShrink: 0,
-		background: 'rgba(18,16,37,0.6)',
+		background: 'rgba(18, 16, 37, 0.65)',
 	},
 	btnDelete: {
 		flex: 1,
 		padding: '11px 0',
 		background: 'rgba(14,90,98,0.15)',
 		border: '1px solid rgba(14,90,98,0.5)',
-		borderRadius: 2,
+		borderRadius: 16,
 		color: '#4db8c4',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 13,
 		fontWeight: 700,
 		letterSpacing: '0.15em',
@@ -211,9 +219,9 @@ const useStyles = makeStyles(() => ({
 		padding: '11px 0',
 		background: 'rgba(32,134,146,0.18)',
 		border: '1px solid rgba(32,134,146,0.6)',
-		borderRadius: 2,
+		borderRadius: 16,
 		color: '#208692',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 13,
 		fontWeight: 700,
 		letterSpacing: '0.15em',
@@ -230,14 +238,14 @@ const useStyles = makeStyles(() => ({
 		'& .MuiDialog-paper': {
 			background: '#121025',
 			border: '1px solid rgba(32,134,146,0.3)',
-			borderRadius: 2,
+			borderRadius: 16,
 			boxShadow: '0 0 40px rgba(0,0,0,0.8)',
-			fontFamily: "'Rajdhani', sans-serif",
+			fontFamily: "'Oswald', sans-serif",
 			minWidth: 380,
 		},
 	},
 	dialogTitle: {
-		fontFamily: "'Orbitron', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 15,
 		color: '#ffffff',
 		borderBottom: '1px solid rgba(32,134,146,0.15)',
@@ -245,7 +253,7 @@ const useStyles = makeStyles(() => ({
 	},
 	dialogBody: {
 		color: 'rgba(255,255,255,0.6)',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 14,
 		letterSpacing: '0.02em',
 		padding: '20px 24px',
@@ -261,9 +269,9 @@ const useStyles = makeStyles(() => ({
 		padding: '9px 0',
 		background: 'transparent',
 		border: '1px solid rgba(255,255,255,0.15)',
-		borderRadius: 2,
+		borderRadius: 16,
 		color: 'rgba(255,255,255,0.5)',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 13,
 		fontWeight: 700,
 		letterSpacing: '0.15em',
@@ -277,9 +285,9 @@ const useStyles = makeStyles(() => ({
 		padding: '9px 0',
 		background: 'rgba(14,90,98,0.2)',
 		border: '1px solid rgba(14,90,98,0.6)',
-		borderRadius: 2,
+		borderRadius: 16,
 		color: '#4db8c4',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 13,
 		fontWeight: 700,
 		letterSpacing: '0.15em',
@@ -295,7 +303,7 @@ const useStyles = makeStyles(() => ({
 		padding: '2px 8px',
 		background: 'rgba(32,134,146,0.12)',
 		border: '1px solid rgba(32,134,146,0.3)',
-		borderRadius: 10,
+		borderRadius: 16,
 		color: 'rgba(32,134,146,0.8)',
 	},
 	'@keyframes panelSlide': {
@@ -311,6 +319,8 @@ const useStyles = makeStyles(() => ({
 const Characters = (props) => {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(false);
+
+	const canCreate = props.characters.length < CHARACTER_SLOT_LIMIT;
 
 	const createCharacter = () => props.showCreator();
 	const playCharacter = () => props.getCharacterSpawns(props.selected);
@@ -331,11 +341,15 @@ const Characters = (props) => {
 							<span className={classes.panelTitle}>Your Characters</span>
 						</div>
 						<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-							<span className={classes.countBadge}>{props.characters.length} / 5</span>
-							<button className={classes.createBtn} onClick={createCharacter}>
-								<FontAwesomeIcon icon={['fas', 'plus']} />
-								New
-							</button>
+							<span className={classes.countBadge}>
+								{props.characters.length} / {CHARACTER_SLOT_LIMIT}
+							</span>
+							{canCreate && (
+								<button className={classes.createBtn} onClick={createCharacter}>
+									<FontAwesomeIcon icon={['fas', 'plus']} />
+									New
+								</button>
+							)}
 						</div>
 					</div>
 					{props.motd ? (
@@ -344,7 +358,7 @@ const Characters = (props) => {
 							<span className={classes.motdText}>{props.motd}</span>
 						</div>
 					) : null}
-					<List className={classes.charList}>
+					<List className={classes.charList} disablePadding>
 						{props.characters.length > 0 ? (
 							props.characters.map((char, i) => (
 								<Character key={i} id={i} character={char} />
@@ -361,13 +375,13 @@ const Characters = (props) => {
 					</List>
 					{Boolean(props.selected) && (
 						<div className={classes.actionBar}>
-							<button className={classes.btnDelete} onClick={() => setOpen(true)}>
-								<FontAwesomeIcon icon={['fas', 'trash']} style={{ marginRight: 8 }} />
-								Delete
-							</button>
 							<button className={classes.btnPlay} onClick={playCharacter}>
 								<FontAwesomeIcon icon={['fas', 'play']} style={{ marginRight: 8 }} />
 								Play
+							</button>
+							<button className={classes.btnDelete} onClick={() => setOpen(true)}>
+								<FontAwesomeIcon icon={['fas', 'trash']} style={{ marginRight: 8 }} />
+								Delete
 							</button>
 						</div>
 					)}
