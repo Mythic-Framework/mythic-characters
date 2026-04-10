@@ -10,35 +10,24 @@ const useStyles = makeStyles(() => ({
 	card: {
 		display: 'block',
 		padding: '16px 20px',
-		borderBottom: '1px solid rgba(32,134,146,0.08)',
-		transition: 'background 0.2s ease',
+		marginBottom: 8,
+		borderRadius: 16,
+		border: '1px solid rgba(32,134,146,0.1)',
+		transition: 'background 0.2s ease, border-color 0.2s ease',
 		userSelect: 'none',
 		cursor: 'pointer',
 		position: 'relative',
-		'&:first-of-type': {
-			borderTop: '1px solid rgba(32,134,146,0.08)',
+		'&:last-of-type': {
+			marginBottom: 0,
 		},
 		'&:hover': {
 			background: 'rgba(32,134,146,0.05)',
+			borderColor: 'rgba(32,134,146,0.18)',
 		},
 		'&.selected': {
 			background: 'rgba(32,134,146,0.08)',
-			borderBottom: '1px solid rgba(32,134,146,0.2)',
+			borderColor: 'rgba(32,134,146,0.35)',
 		},
-	},
-	accentBar: {
-		position: 'absolute',
-		left: 0,
-		top: 0,
-		bottom: 0,
-		width: 3,
-		background: '#208692',
-		boxShadow: '0 0 8px rgba(32,134,146,0.6)',
-		opacity: 0,
-		transition: 'opacity 0.2s ease',
-	},
-	accentBarVisible: {
-		opacity: 1,
 	},
 	topRow: {
 		display: 'flex',
@@ -47,7 +36,7 @@ const useStyles = makeStyles(() => ({
 		marginBottom: 4,
 	},
 	name: {
-		fontFamily: "'Orbitron', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		fontSize: 13,
 		fontWeight: 700,
 		color: '#ffffff',
@@ -61,7 +50,7 @@ const useStyles = makeStyles(() => ({
 	lastPlayed: {
 		fontSize: 11,
 		color: 'rgba(255,255,255,0.3)',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		letterSpacing: '0.03em',
 	},
 	lastPlayedValue: {
@@ -83,9 +72,9 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		padding: '6px 12px',
-		background: 'rgba(18,16,37,0.8)',
+		background: 'rgba(18, 16, 37, 0.85)',
 		border: '1px solid rgba(32,134,146,0.15)',
-		borderRadius: 2,
+		borderRadius: 16,
 		minWidth: 100,
 	},
 	chipLabel: {
@@ -100,7 +89,7 @@ const useStyles = makeStyles(() => ({
 		fontSize: 12,
 		fontWeight: 600,
 		color: 'rgba(255,255,255,0.8)',
-		fontFamily: "'Rajdhani', sans-serif",
+		fontFamily: "'Oswald', sans-serif",
 		letterSpacing: '0.03em',
 	},
 	chipSub: {
@@ -131,7 +120,6 @@ export default ({ character }) => {
 			className={`${classes.card}${isSelected ? ' selected' : ''}`}
 			onClick={onClick}
 		>
-			<div className={`${classes.accentBar}${isSelected ? ` ${classes.accentBarVisible}` : ''}`} />
 			<div className={classes.topRow}>
 				<span className={classes.name}>
 					{character.First} {character.Last}

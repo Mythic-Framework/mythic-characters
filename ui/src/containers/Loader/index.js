@@ -23,9 +23,9 @@ const useStyles = makeStyles(() => ({
 		alignItems: 'center',
 		gap: 28,
 		padding: '40px 52px',
-		background: 'rgba(18, 16, 37, 0.97)',
-		border: '1px solid rgba(32,134,146,0.2)',
-		boxShadow: '0 0 0 1px rgba(32,134,146,0.05), 0 24px 60px rgba(0,0,0,0.8)',
+		background: 'transparent',
+		border: 'none',
+		boxShadow: 'none',
 		animation: '$fadeIn 0.3s ease both',
 	},
 	messageRow: {

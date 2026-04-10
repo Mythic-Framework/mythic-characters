@@ -78,10 +78,10 @@ export default () => {
 			MuiPaper: {
 				styleOverrides: {
 					root: {
-						background: 'rgba(18, 16, 37, 0.97)',
+						background: 'transparent',
 						backgroundImage: 'none',
-						border: '1px solid rgba(32,134,146,0.2)',
-						boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+						border: 'none',
+						boxShadow: 'none',
 					},
 				},
 			},
@@ -103,10 +103,10 @@ export default () => {
 			MuiAutocomplete: {
 				styleOverrides: {
 					paper: {
-						background: 'rgba(18, 16, 37, 0.97)',
+						background: 'transparent',
 						backgroundImage: 'none',
-						border: '1px solid rgba(32,134,146,0.2)',
-						boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+						border: 'none',
+						boxShadow: 'none',
 					},
 					option: {
 						fontFamily: "'Rajdhani', sans-serif",
@@ -129,10 +129,10 @@ export default () => {
 			MuiPickersPopper: {
 				styleOverrides: {
 					paper: {
-						background: 'rgba(18, 16, 37, 0.97)',
+						background: 'transparent',
 						backgroundImage: 'none',
-						border: '1px solid rgba(32,134,146,0.2)',
-						boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+						border: 'none',
+						boxShadow: 'none',
 					},
 				},
 			},
