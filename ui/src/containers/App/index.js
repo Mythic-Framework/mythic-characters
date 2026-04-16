@@ -20,6 +20,14 @@ export default () => {
 	const hidden = useSelector((state) => state.app.hidden);
 	const appState = useSelector((state) => state.app.state);
 	const loading = useSelector((state) => state.loader.loading);
+	const overlaySurface = {
+		background: 'rgba(18, 16, 37, 0.98)',
+		backgroundImage: 'none',
+		border: '1px solid rgba(32,134,146,0.24)',
+		boxShadow: '0 20px 48px rgba(0,0,0,0.72), 0 0 24px rgba(32,134,146,0.08)',
+		backdropFilter: 'none',
+		WebkitBackdropFilter: 'none',
+	};
 
 	const muiTheme = createTheme({
 		typography: {
@@ -78,10 +86,7 @@ export default () => {
 			MuiPaper: {
 				styleOverrides: {
 					root: {
-						background: 'transparent',
-						backgroundImage: 'none',
-						border: 'none',
-						boxShadow: 'none',
+						...overlaySurface,
 					},
 				},
 			},
@@ -103,10 +108,7 @@ export default () => {
 			MuiAutocomplete: {
 				styleOverrides: {
 					paper: {
-						background: 'transparent',
-						backgroundImage: 'none',
-						border: 'none',
-						boxShadow: 'none',
+						...overlaySurface,
 					},
 					option: {
 						fontFamily: "'Rajdhani', sans-serif",
@@ -129,17 +131,14 @@ export default () => {
 			MuiPickersPopper: {
 				styleOverrides: {
 					paper: {
-						background: 'transparent',
-						backgroundImage: 'none',
-						border: 'none',
-						boxShadow: 'none',
+						...overlaySurface,
 					},
 				},
 			},
 			MuiDateCalendar: {
 				styleOverrides: {
 					root: {
-						background: 'transparent',
+						background: 'rgba(18, 16, 37, 0.98)',
 						color: '#ffffff',
 						fontFamily: "'Rajdhani', sans-serif",
 					},
