@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 use_experimental_fxv2_oal 'yes'
 
-version '1.0.2'
+version '1.0.3'
 repository 'https://github.com/Mythic-Framework/mythic-characters'
 
 client_script '@mythic-base/components/cl_error.lua'
