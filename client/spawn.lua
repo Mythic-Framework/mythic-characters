@@ -37,7 +37,7 @@ Spawn = {
         FreezeEntityPosition(ped, true)
         SetEntityVisible(ped, false)
         DoScreenFadeIn(500)
-        Wait(500) -- Why the fuck does NUI just not do this without a wait here???
+        Wait(500) -- yes this wait is necessary to prevent the player from falling through the void.
         SetNuiFocus(true, true)
         SendNUIMessage({ type = 'APP_SHOW' })
     end,
